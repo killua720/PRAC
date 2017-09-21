@@ -13,9 +13,10 @@
         $host ="localhost";  //請看 主機上的 /etc/hosts
         $user ="homestead";
         $password ="secret";
+        $database = "test";
 
         //執行連線到資料庫的動作,並將回傳的東西存放到$dbLink中
-        $dbLink = new mysqli($host,$user,$password);
+        $dbLink = new mysqli($host,$user,$password, $database);
 
         //檢查是否連線錯誤
         if($dbLink->connect_error)
@@ -25,6 +26,22 @@
         }
         else
             echo "連線成功<br>~";
+
+        $sql = "SELECT * FROM students";
+        $dbLink->query($sql);
+        $result = $dbLink->query($sql);
+
+        var_dump($result);
+
+        if( $result->num_rows > 0 )
+        {
+            while ( $row = $result->fetch_array() )
+            {
+                echo "name:".$row["name"].
+                    ",gender:".$row["gender"].
+                    ",adress:".$row["addressArea"]. $row["adressDetail"];
+            }
+        }
     ?>
 </body>
 </html>
