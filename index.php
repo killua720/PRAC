@@ -7,8 +7,5 @@
 <body>
 <h1>Finally Success!PHP</h1>
 <h2>哈囉!PHP</h2>
-<?php
-echo "This is after hypertext preprocessor!"
-?>
 </body>
 </html>
