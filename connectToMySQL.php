@@ -27,21 +27,34 @@
         else
             echo "連線成功<br>~";
 
-        $sql = "SELECT * FROM students";
-        $dbLink->query($sql);
-        $result = $dbLink->query($sql);
+        //新增一筆資料
+        $sql = "INSERT INTO students VALUES ('mike','m','XingZu','ZhongShan Rd.')";
 
-        var_dump($result);
+        if( $dbLink->query( $sql) )
+            echo "成功新增資料";
+        else
+            echo "新增資料錯誤:".$sql."<br>".$dbLink->error."<br>";
+
+
+        //讀取資料
+        $sql = "SELECT * FROM students";//要執行的SQL語法
+        $result = $dbLink->query($sql);//叫mysql執行
+
+        //var_dump($result);
 
         if( $result->num_rows > 0 )
         {
             while ( $row = $result->fetch_array() )
             {
-                echo "name:".$row["name"].
+                echo "<br>name:".$row["name"].
                     ",gender:".$row["gender"].
                     ",adress:".$row["addressArea"]. $row["adressDetail"];
             }
         }
+        else
+            echo "no data";
+
+        $dbLink->close();
     ?>
 </body>
 </html>
